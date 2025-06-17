@@ -14,9 +14,9 @@ public class AppDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Client>().HasData(
-            new Client { Id = 1, Name = "Алиса", Email = "alice@example.com", BalanceT = 100 },
-            new Client { Id = 2, Name = "Боб", Email = "bob@example.com", BalanceT = 200 },
-            new Client { Id = 3, Name = "Клара", Email = "clara@example.com", BalanceT = 300 }
+            new Client { Id = 1, Name = "Алиса", Email = "alice@mirra.dev", BalanceT = 100 },
+            new Client { Id = 2, Name = "Боб", Email = "bob@mirra.dev", BalanceT = 200 },
+            new Client { Id = 3, Name = "Клара", Email = "clara@mirra.dev", BalanceT = 300 }
         );
 
         modelBuilder.Entity<Payment>().HasData(
