@@ -44,5 +44,5 @@ npm run dev
 Откроется на: http://localhost:5173
 
 ### Данные для входа
-Email:    admin@mirra.dev  
-Password: admin123
+- Email:    admin@mirra.dev  
+- Password: admin123
