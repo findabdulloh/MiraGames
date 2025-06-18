@@ -1,32 +1,51 @@
 import { useState, useEffect } from 'react';
 import api from '../api';
 import Header from '../components/Header';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 export default function Payments() {
   const [clients, setClients] = useState([]);
   const [clientId, setClientId] = useState('');
   const [take, setTake] = useState(5);
   const [payments, setPayments] = useState([]);
+  const navigate = useNavigate();
 
-  const loadPayments = () => {
+  const [searchParams] = useSearchParams();
+
+  const loadPayments = (id = clientId, tk = take) => {
     const params = new URLSearchParams();
-    if (clientId) params.append('clientId', clientId);
-    if (take) params.append('take', take);
+    if (id) params.append('clientId', id);
+    if (tk) params.append('take', tk);
 
     api.get(`/payments?${params.toString()}`)
       .then(res => setPayments(res.data))
       .catch(() => alert('Failed to load payments'));
+
+    navigate(`/payments?${params.toString()}`);
   };
+
+  useEffect(() => {
+    const initialClientId = searchParams.get('clientId');
+    const initialTake = parseInt(searchParams.get('take'), 10);
+
+    if (initialClientId) setClientId(initialClientId);
+    if (!isNaN(initialTake)) setTake(initialTake);
+  }, []);
 
   useEffect(() => {
     api.get('/clients')
       .then(res => {
         setClients(res.data);
-        loadPayments();
       })
       .catch(() => alert('Failed to load clients'));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (clients.length > 0) {
+      loadPayments();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clients, clientId]);
 
   return (
     <>
@@ -39,7 +58,11 @@ export default function Payments() {
             <label style={styles.label}>Client</label>
             <select
               value={clientId}
-              onChange={e => setClientId(e.target.value)}
+              onChange={e => {
+                const newId = e.target.value;
+                setClientId(newId);
+                loadPayments(newId, take);
+              }}
               style={styles.select}
             >
               <option value="">All Clients</option>
@@ -56,11 +79,24 @@ export default function Payments() {
               min="1"
               value={take}
               onChange={e => setTake(e.target.value)}
+              onKeyDown={e => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  const inputValue = parseInt(e.target.value, 10) || 1;
+                  setTake(inputValue);
+                  loadPayments(clientId, inputValue);
+                }
+              }}
               style={styles.input}
             />
           </div>
 
-          <button onClick={loadPayments} style={styles.button}>Load</button>
+          <button
+            onClick={() => loadPayments()}
+            style={styles.button}
+          >
+            Load
+          </button>
         </div>
 
         {payments.length > 0 && (
@@ -108,7 +144,7 @@ const styles = {
   },
   filterBox: {
     display: 'flex',
-    alignItems: 'flex-end', // ✅ key for baseline alignment
+    alignItems: 'flex-end',
     gap: '20px',
     flexWrap: 'wrap',
     marginBottom: '30px',

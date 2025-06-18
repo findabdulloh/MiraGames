@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import api from '../api';
+import { Link } from 'react-router-dom';
 
 export default function ClientsTable() {
   const [clients, setClients] = useState([]);
@@ -11,7 +12,7 @@ export default function ClientsTable() {
   }, []);
 
   return (
-    <div style={styles.container}>
+    <div style={styles.tableWrapper}>
       <table style={styles.table}>
         <thead>
           <tr>
@@ -19,6 +20,7 @@ export default function ClientsTable() {
             <th style={styles.th}>Name</th>
             <th style={styles.th}>Email</th>
             <th style={styles.th}>Balance</th>
+            <th style={styles.th}>Payments</th>
           </tr>
         </thead>
         <tbody>
@@ -28,6 +30,14 @@ export default function ClientsTable() {
               <td style={styles.td}>{client.name}</td>
               <td style={styles.td}>{client.email}</td>
               <td style={styles.td}>{client.balanceT}</td>
+              <td style={styles.td}>
+                <Link
+                  to={`/payments?clientId=${client.id}`}
+                  style={styles.link}
+                >
+                  View
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -37,20 +47,21 @@ export default function ClientsTable() {
 }
 
 const styles = {
-  container: {
+  tableWrapper: {
     overflowX: 'auto',
     backgroundColor: '#1F1F1F',
-    padding: '20px',
+    padding: '15px',
     borderRadius: '10px',
-    boxShadow: '0 0 10px rgba(255, 255, 255, 0.05)',
+    boxShadow: '0 0 12px rgba(255, 255, 255, 0.04)',
+    marginTop: '20px'
   },
   table: {
     width: '100%',
     borderCollapse: 'collapse',
   },
   th: {
-    textAlign: 'left',
     padding: '12px',
+    textAlign: 'left',
     backgroundColor: '#222',
     color: '#03DAC6',
     borderBottom: '1px solid #333',
@@ -60,5 +71,10 @@ const styles = {
     padding: '12px',
     borderBottom: '1px solid #333',
     color: '#E0E0E0',
-  }
+  },
+  link: {
+    color: '#03DAC6',
+    textDecoration: 'underline',
+    cursor: 'pointer',
+  },
 };

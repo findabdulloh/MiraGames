@@ -9,9 +9,12 @@ public static class PaymentEndpoints
     {
         app.MapGet("/payments", async (AppDbContext db, int take = 5, long? clientId = null) =>
         {
-            var paymentsQuery = clientId is null ? db.Payments : db.Payments.Where(x => x.ClientId == clientId);
+            var query = db.Payments.AsQueryable();
 
-            var payments = await paymentsQuery
+            if (clientId is not null)
+                query = query.Where(p => p.ClientId == clientId);
+
+            var payments = await query
                 .Include(p => p.Client)
                 .OrderByDescending(p => p.Date)
                 .Take(take)
