@@ -96,3 +96,10 @@ curl -X POST http://localhost:5000/rate \
   -H "Content-Type: application/json" \
   -d "{\"id\":1,\"value\":15}"
 ```
+### 5. Получить текущий курс токена
+GET /rate
+
+cURL:
+```cmd
+curl http://localhost:5000/rate
+```
