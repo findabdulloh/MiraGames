@@ -65,6 +65,7 @@ curl -X POST http://localhost:5000/auth/login \
 ```
 ### 2. Получить список клиентов
 GET /clients
+
 cURL:
 ```cmd
 curl http://localhost:5000/clients
