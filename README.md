@@ -19,11 +19,20 @@
 
 ---
 
-## ⚙️ Установка и запуск
+## Установка и запуск
 
-### 🔹 Backend
+###  Backend
 
-```bash
+```cmd
 cd MiraGames.Backend
 dotnet restore
 dotnet run
+```
+
+###  Frontend
+
+```cmd
+cd MiraGames.Frontend
+npm install
+npm run dev
+```
