@@ -36,3 +36,6 @@ cd MiraGames.Frontend
 npm install
 npm run dev
 ```
+### Данные для входа
+Email: admin@mirra.dev
+Password: admin123
