@@ -46,3 +46,20 @@ npm run dev
 ### Данные для входа
 - Email:    admin@mirra.dev  
 - Password: admin123
+
+---
+## Тесты curl / Postman
+### Авторизация
+POST /auth/login
+```json
+{
+  "email": "admin@mirra.dev",
+  "password": "admin123"
+}
+```
+cURL:
+```cmd
+curl -X POST http://localhost:5000/auth/login \
+  -H "Content-Type: application/json" \
+  -d "{\"email\":\"admin@mirra.dev\",\"password\":\"admin123\"}"
+```
