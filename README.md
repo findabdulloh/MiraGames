@@ -28,7 +28,6 @@
 
 ```cmd
 cd MiraGames.Backend
-dotnet restore
 dotnet run
 ```
 
