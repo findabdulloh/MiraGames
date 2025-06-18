@@ -63,3 +63,9 @@ curl -X POST http://localhost:5000/auth/login \
   -H "Content-Type: application/json" \
   -d "{\"email\":\"admin@mirra.dev\",\"password\":\"admin123\"}"
 ```
+### Получить список клиентов
+GET /clients
+cURL:
+```cmd
+curl http://localhost:5000/clients
+```
