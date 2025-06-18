@@ -81,3 +81,19 @@ cURL:
 ```cmd
 curl "http://localhost:5000/payments?take=5&clientId=1"
 ```
+### 4. Обновить курс токена
+POST /rate
+JSON:
+```json
+{
+  "id": 1,
+  "value": 15
+}
+```
+
+cURL:
+```cmd
+curl -X POST http://localhost:5000/rate \
+  -H "Content-Type: application/json" \
+  -d "{\"id\":1,\"value\":15}"
+```
