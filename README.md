@@ -69,3 +69,14 @@ cURL:
 ```cmd
 curl http://localhost:5000/clients
 ```
+
+### 3. Получить историю платежей
+GET /payments?take=5
+| Query param | Описание                 |
+| ----------- | ------------------------ |
+| `take`      | Сколько платежей вернуть |
+| `clientId`  | (опц.) фильтр по клиенту |
+cURL:
+```cmd
+curl "http://localhost:5000/payments?take=5&clientId=1"
+```
