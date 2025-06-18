@@ -7,9 +7,11 @@ public static class PaymentEndpoints
 {
     public static void MapPaymentEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/payments", async (AppDbContext db, int take = 5) =>
+        app.MapGet("/payments", async (AppDbContext db, int take = 5, long? clientId = null) =>
         {
-            var payments = await db.Payments
+            var paymentsQuery = clientId is null ? db.Payments : db.Payments.Where(x => x.ClientId == clientId);
+
+            var payments = await paymentsQuery
                 .Include(p => p.Client)
                 .OrderByDescending(p => p.Date)
                 .Take(take)

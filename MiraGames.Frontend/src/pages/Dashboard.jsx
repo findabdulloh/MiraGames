@@ -33,7 +33,8 @@ const styles = {
     fontSize: '32px',
     color: '#03DAC6',
     textAlign: 'center',
-    marginBottom: '40px',
+    marginBottom: '20px',
+    margin: '0px',
   },
   subtitle: {
     fontSize: '20px',
