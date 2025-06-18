@@ -49,7 +49,7 @@ npm run dev
 
 ---
 ## Тесты curl / Postman
-### Авторизация
+### 1. Авторизация
 POST /auth/login
 ```json
 {
@@ -63,7 +63,7 @@ curl -X POST http://localhost:5000/auth/login \
   -H "Content-Type: application/json" \
   -d "{\"email\":\"admin@mirra.dev\",\"password\":\"admin123\"}"
 ```
-### Получить список клиентов
+### 2. Получить список клиентов
 GET /clients
 cURL:
 ```cmd
