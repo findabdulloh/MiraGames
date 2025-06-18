@@ -76,6 +76,7 @@ GET /payments?take=5
 | ----------- | ------------------------ |
 | `take`      | Сколько платежей вернуть |
 | `clientId`  | (опц.) фильтр по клиенту |
+
 cURL:
 ```cmd
 curl "http://localhost:5000/payments?take=5&clientId=1"
